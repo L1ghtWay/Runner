@@ -25,15 +25,26 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : SingletonMonoBe
             {
                 var go = new GameObject(typeof(T).Name);
                 _instance = go.AddComponent<T>();
-            }      
+            }
+
+            if (!_instance.initialized)
+            {
+                _instance.Initialize();
+                _instance.initialized = true;
+            }
         }
     }
 
     public virtual void Awake()
-    {       
-        if (_instance != null)
+    {
+        //if (Application.isPlaying)
+        //{
+        //    DontDestroyOnLoad(this);
+        //}
+
+        if (_instance)
         {
-            DestroyImmediate(gameObject);
+            Destroy(gameObject);
         }
     }
 

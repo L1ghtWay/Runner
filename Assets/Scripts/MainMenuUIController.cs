@@ -38,7 +38,8 @@ public class MainMenuUIController : MonoBehaviour
     }   
 
     public void Exit()
-    {        
+    {
+        PlayerPrefsController.instance.SaveData();
         Application.Quit();        
     }
 

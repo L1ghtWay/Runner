@@ -46,12 +46,12 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        if (PlayerController.instance != null)
+        if (instance != null)
         {
             Destroy(gameObject);
             return;
         }
-        PlayerController.instance = this;
+        instance = this;
     }    
 
     void Start()
@@ -229,6 +229,8 @@ public class PlayerController : MonoBehaviour
         }
 
         else newRecord = false;
+        PlayerPrefsController.instance.SaveData();
+        
     }  
 
     private void Death ()
@@ -262,7 +264,7 @@ public class PlayerController : MonoBehaviour
     
     private void OnDestroy()
     {
-        PlayerController.instance = null;
+        instance = null;
     }    
 }
 
