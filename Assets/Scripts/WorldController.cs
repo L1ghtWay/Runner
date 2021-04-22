@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldController : SingletonMonoBehaviour <WorldController>
+public class WorldController : MonoBehaviour
 {
     public float speed = 10f;  
     public float minZ = -100;
@@ -11,9 +11,16 @@ public class WorldController : SingletonMonoBehaviour <WorldController>
     public delegate void TruToDelAndAddPlatform();
     public event TruToDelAndAddPlatform OnPlatformMovement;
 
-    new void Awake()
+    public static WorldController instance;
+
+    private void Awake()
     {
-        base.Awake();
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
     }
 
     void Start()
@@ -48,5 +55,10 @@ public class WorldController : SingletonMonoBehaviour <WorldController>
             yield return new WaitForSeconds(60f);
             speed += 2f;
         }
-    }    
+    }
+
+    private void OnDestroy()
+    {
+        instance = null;
+    }
 }

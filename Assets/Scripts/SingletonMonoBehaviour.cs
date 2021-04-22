@@ -37,10 +37,10 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : SingletonMonoBe
 
     public virtual void Awake()
     {
-        //if (Application.isPlaying)
-        //{
-        //    DontDestroyOnLoad(this);
-        //}
+        if (Application.isPlaying)
+        {
+            DontDestroyOnLoad(this);
+        }
 
         if (_instance)
         {

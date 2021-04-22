@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf8a7e2e521139f4a98e11b6b8c84139, type: 3}
   m_Name: SaveData
   m_EditorClassIdentifier: 
-  coinsBalance: 0
-  recordScore: 0
-  mainVolume: 0.7589286
+  coinsBalance: 25
+  recordScore: 88
+  mainVolume: 1
   musicVolume: 1
   moveVolume: 1
   muteAllSounds: 0

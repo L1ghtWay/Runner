@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPrefsController : MonoBehaviour
+public class PlayerPrefsController : SingletonMonoBehaviour<PlayerPrefsController>
 {
     public int coinsBalance;
     public float recordScore;
@@ -11,25 +11,14 @@ public class PlayerPrefsController : MonoBehaviour
     public float moveVolume;
     public int muteAllSoundsInt;
     public bool muteAllSounds;
-
-    public static PlayerPrefsController instance;
+    
     public SaveData saveData;
 
-    void Awake()
+    protected override void Initialize()
     {
-        if (instance == null)
-        {
-            DontDestroyOnLoad(this);
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-        LoadData();        
+        LoadData();
     }
-    
+
     public void LoadData ()
     {
         if (PlayerPrefs.HasKey("MuteAllSoundsInt"))
@@ -113,10 +102,5 @@ public class PlayerPrefsController : MonoBehaviour
         moveVolume = saveData.moveVolume;
         coinsBalance = saveData.coinsBalance;
         recordScore = saveData.recordScore;
-    }
-
-    private void OnDestroy()
-    {
-        instance = null;
     }
 }

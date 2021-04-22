@@ -10,5 +10,5 @@ public class SaveData : ScriptableObject
     public float mainVolume;
     public float musicVolume;
     public float moveVolume;    
-    public bool muteAllSounds;    
+    public bool muteAllSounds;
 }
