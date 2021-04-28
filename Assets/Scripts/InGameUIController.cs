@@ -20,8 +20,6 @@ public class InGameUIController : MonoBehaviour
 
     private AudioSource playerAudioSource;
 
-    
-
     private void Start()
     {
         playerAudioSource = PlayerController.instance.GetComponent<AudioSource>();
@@ -54,6 +52,7 @@ public class InGameUIController : MonoBehaviour
         else
         {            
             playerAudioSource.Play();
+            PlayerPrefsController.instance.SaveMusicData();
         }
     }
 
@@ -65,6 +64,7 @@ public class InGameUIController : MonoBehaviour
 
     public void ExitToTheMainMenu ()
     {
+        PlayerPrefsController.instance.SaveMusicData();
         SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 

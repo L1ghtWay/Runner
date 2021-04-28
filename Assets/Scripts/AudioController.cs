@@ -11,25 +11,22 @@ public class AudioController : MonoBehaviour
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider moveSlider;
     [SerializeField] private Toggle muteAllSounds;
-
-    [SerializeField] private SaveData saveData;
-
-
-
+    
     private void Start()
-    {
+    {       
+        masterSlider.value = PlayerPrefsController.instance.mainVolume;
+       
+        musicSlider.value = PlayerPrefsController.instance.musicVolume;
+        
+        moveSlider.value = PlayerPrefsController.instance.moveVolume;       
 
-        mixer.audioMixer.SetFloat("MasterVolume", saveData.mainVolume);
-        masterSlider.value = saveData.mainVolume;
+        if (PlayerPrefsController.instance.muteAllSoundsInt == 1)
+        {
+            PlayerPrefsController.instance.muteAllSounds = true;
+        }
+        else PlayerPrefsController.instance.muteAllSounds = false;
 
-        mixer.audioMixer.SetFloat("BackgroundSoundsVolume", saveData.musicVolume);
-        musicSlider.value = saveData.musicVolume;
-
-        mixer.audioMixer.SetFloat("MoveSoundsVolume", saveData.moveVolume);
-        moveSlider.value = saveData.moveVolume;
-
-        muteAllSounds.isOn = saveData.muteAllSounds;
-
+        muteAllSounds.isOn = PlayerPrefsController.instance.muteAllSounds;
     }
 
     public void MuteAllSounds(bool enabled)
@@ -37,30 +34,30 @@ public class AudioController : MonoBehaviour
         if (enabled)
         {
             mixer.audioMixer.SetFloat("MasterVolume", -80);
-            saveData.muteAllSounds = true;
+            PlayerPrefsController.instance.muteAllSoundsInt = 1;            
         }
         else
         {
-            mixer.audioMixer.SetFloat("MasterVolume", Mathf.Lerp(-80, 0, saveData.mainVolume));
-            saveData.muteAllSounds = false;
+            mixer.audioMixer.SetFloat("MasterVolume", Mathf.Lerp(-80, 0, PlayerPrefsController.instance.mainVolume));
+            PlayerPrefsController.instance.muteAllSoundsInt = 0;
         }
     }
 
     public void MainVolumeSettings(float volume)
     {        
         mixer.audioMixer.SetFloat("MasterVolume", Mathf.Lerp(-80, 0, volume));
-        saveData.mainVolume = volume;        
+        PlayerPrefsController.instance.mainVolume = volume;        
     }
     
     public void BackgroundVolumeSettings (float volume)
     {
         mixer.audioMixer.SetFloat("BackgroundSoundsVolume", Mathf.Lerp(-80, 0, volume));
-        saveData.musicVolume = volume;
+        PlayerPrefsController.instance.musicVolume = volume;
     }
 
     public void MoveVolumeSettings (float volume)
     {
         mixer.audioMixer.SetFloat("MoveSoundsVolume", Mathf.Lerp(-80, 20, volume));
-        saveData.moveVolume = volume;
+        PlayerPrefsController.instance.moveVolume = volume;
     }
 }

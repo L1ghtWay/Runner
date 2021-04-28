@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject[] ragDollsCapsuleColliders;
     [SerializeField] private GameObject ragDollsSphereColliders;
     [SerializeField] private Timer timer;
-    [SerializeField] private SaveData saveData;
 
     private Animator animator;
     private CharacterController cc;    
@@ -220,17 +219,16 @@ public class PlayerController : MonoBehaviour
         timer.StopTimer();
         score = timer.GetTime();
 
-        saveData.coinsBalance += coinsBalance;
+        PlayerPrefsController.instance.coinsBalance += coinsBalance;
 
-        if (score > saveData.recordScore)
+        if (score > PlayerPrefsController.instance.recordScore)
         {
             newRecord = true;
-            saveData.recordScore = score;
+            PlayerPrefsController.instance.recordScore = score;
         }
 
         else newRecord = false;
-        PlayerPrefsController.instance.SaveData();
-        
+        PlayerPrefsController.instance.SaveData();        
     }  
 
     private void Death ()

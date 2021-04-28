@@ -2717,7 +2717,6 @@ MonoBehaviour:
   mainButtons: {fileID: 516850165}
   recordScore: {fileID: 1229511455}
   coinsBalance: {fileID: 384011809}
-  saveData: {fileID: 11400000, guid: 01bb0ea7a52573b49b1cc07f790800c3, type: 2}
 --- !u!114 &1046401568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2735,7 +2734,6 @@ MonoBehaviour:
   musicSlider: {fileID: 633647259}
   moveSlider: {fileID: 260339047}
   muteAllSounds: {fileID: 707485251}
-  saveData: {fileID: 11400000, guid: 01bb0ea7a52573b49b1cc07f790800c3, type: 2}
 --- !u!1 &1063344622
 GameObject:
   m_ObjectHideFlags: 0
@@ -2879,14 +2877,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a10ae693177751408f374222a675b59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinsBalance: 5
-  recordScore: 49
+  coinsBalance: 0
+  recordScore: 0
   mainVolume: 1
   musicVolume: 1
   moveVolume: 1
   muteAllSoundsInt: 0
   muteAllSounds: 0
-  saveData: {fileID: 11400000, guid: 01bb0ea7a52573b49b1cc07f790800c3, type: 2}
 --- !u!4 &1158727972
 Transform:
   m_ObjectHideFlags: 0

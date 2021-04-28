@@ -11,8 +11,6 @@ public class PlayerPrefsController : SingletonMonoBehaviour<PlayerPrefsControlle
     public float moveVolume;
     public int muteAllSoundsInt;
     public bool muteAllSounds;
-    
-    public SaveData saveData;
 
     protected override void Initialize()
     {
@@ -25,19 +23,13 @@ public class PlayerPrefsController : SingletonMonoBehaviour<PlayerPrefsControlle
         {
             muteAllSoundsInt = PlayerPrefs.GetInt("MuteAllSoundsInt");            
         }
-        else muteAllSoundsInt = 0;
+        else muteAllSoundsInt = 0;        
 
-        if (muteAllSoundsInt == 1)
-        {
-            muteAllSounds = true;            
-        }
-        else muteAllSounds = false;            
-        
         if (PlayerPrefs.HasKey("MainVolume"))
         {
             mainVolume = PlayerPrefs.GetFloat("MainVolume");
         }
-        else mainVolume = 1;
+        else mainVolume = 1;     
 
         if (PlayerPrefs.HasKey("MusicVolume"))
         {
@@ -49,7 +41,7 @@ public class PlayerPrefsController : SingletonMonoBehaviour<PlayerPrefsControlle
         {
             moveVolume = PlayerPrefs.GetFloat("MoveVolume");
         }
-        else moveVolume = 1;
+        else moveVolume = 20;
 
         if (PlayerPrefs.HasKey("CoinsBalance"))
         {
@@ -62,45 +54,26 @@ public class PlayerPrefsController : SingletonMonoBehaviour<PlayerPrefsControlle
             recordScore = PlayerPrefs.GetFloat("RecordScore");
         }
         else recordScore = 0;
-
-        GetDataToScriptableObject();
     }   
     
     public void SaveData ()
     {
-        SetDataFromScriptableObject();
-
         PlayerPrefs.SetInt("CoinsBalance", coinsBalance);
         PlayerPrefs.SetFloat("RecordScore", recordScore);
+        PlayerPrefs.Save();
+    }
+    
+    public void SaveMusicData ()
+    {
         PlayerPrefs.SetFloat("MainVolume", mainVolume);
         PlayerPrefs.SetFloat("MusicVolume", musicVolume);
         PlayerPrefs.SetFloat("MoveVolume", moveVolume);
         PlayerPrefs.SetInt("MuteAllSoundsInt", muteAllSoundsInt);
         PlayerPrefs.Save();
-    }  
+    }
     
     public void DeleteAllData ()
     {
         PlayerPrefs.DeleteAll();
-    }
-
-    private void GetDataToScriptableObject()
-    {
-        saveData.muteAllSounds = muteAllSounds;
-        saveData.mainVolume = mainVolume;
-        saveData.musicVolume = musicVolume;
-        saveData.moveVolume = moveVolume;
-        saveData.coinsBalance = coinsBalance;
-        saveData.recordScore = recordScore;
-    }
-
-    private void SetDataFromScriptableObject()
-    {
-        muteAllSounds = saveData.muteAllSounds;
-        mainVolume = saveData.mainVolume;
-        musicVolume = saveData.musicVolume;
-        moveVolume = saveData.moveVolume;
-        coinsBalance = saveData.coinsBalance;
-        recordScore = saveData.recordScore;
     }
 }

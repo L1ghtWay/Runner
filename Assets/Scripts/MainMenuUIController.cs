@@ -13,12 +13,11 @@ public class MainMenuUIController : MonoBehaviour
     [SerializeField] private GameObject mainButtons;
     [SerializeField] private Text recordScore;
     [SerializeField] private Text coinsBalance;
-    [SerializeField] private SaveData saveData;
 
     private void Start()
     {
-        coinsBalance.text = $"Coins:\n {saveData.coinsBalance}";
-        recordScore.text = $"Best score:\n {saveData.recordScore}";
+        coinsBalance.text = $"Coins:\n {PlayerPrefsController.instance.coinsBalance}";
+        recordScore.text = $"Best score:\n {PlayerPrefsController.instance.recordScore}";
     }
     public void StartGame()
     {        
@@ -27,6 +26,7 @@ public class MainMenuUIController : MonoBehaviour
 
     public void Settings ()
     {
+        PlayerPrefsController.instance.SaveMusicData();
         settingsPanel.SetActive(!settingsPanel.activeInHierarchy);
         mainButtons.SetActive(!mainButtons.activeInHierarchy);        
     }
@@ -39,7 +39,7 @@ public class MainMenuUIController : MonoBehaviour
 
     public void Exit()
     {
-        PlayerPrefsController.instance.SaveData();
+        PlayerPrefsController.instance.DeleteAllData();
         Application.Quit();        
     }
 }
